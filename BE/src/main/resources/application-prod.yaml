@@ -1,16 +1,15 @@
 server:
   port: ${PORT}
+
 spring:
-  app:
-    jwtCookie: refreshToken
   application:
     name: hrm-backend
-  datasource:
-    url: ${DATABASE_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
 
+  datasource:
+    url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}?useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQLUSER}
+    password: ${MYSQLPASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
@@ -19,9 +18,10 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        format_sql: false
         dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: false
     show-sql: false
+
   flyway:
     enabled: true
     baseline-on-migrate: true
@@ -50,13 +50,10 @@ frontend:
 jwt:
   secret: ${SECRET_KEY}
   access-token-validity-seconds: 3600
-  refresh-token-validity-seconds:  604800
+  refresh-token-validity-seconds: 604800
 
-logging:
-  level:
-    org:
-      springframework:
-        security: INFO
-    com:
-      phong:
-        hrm_backend: INFO
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

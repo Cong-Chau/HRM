@@ -67,8 +67,8 @@ public class SecurityConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("http://localhost:5173");
-        //        corsConfiguration.addAllowedOrigin("*"); // cho phép tất cả các domain
+//        corsConfiguration.addAllowedOrigin("https://human-result-management.vercel.app");
+        corsConfiguration.addAllowedOriginPattern("*"); // cho phép tất cả các domain
         corsConfiguration.addAllowedMethod("*"); // cho phép tất cả các method (GET, POST, PUT, DELETE, ...)
         corsConfiguration.addAllowedHeader("*"); // cho phép tất cả các header
         corsConfiguration.setAllowCredentials(true); // cho phép gửi cookie
